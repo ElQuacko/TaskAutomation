@@ -1,11 +1,11 @@
 import shutil, os
 
 text_files = [".txt"]
-grapic_files = [".jpg", ".bmp", ".png", ".gif", ".psd"]
-office_files = [".doc", ".xlsx", ".ppt", ".ods"]
+grapic_files = [".jpg", ".JPG", ".bmp", ".png", ".gif", ".psd"]
+office_files = [".doc", "docx", ".xlsx", ".csx", ".ppt", ".pptx", ".ods"]
 pdf_files = [".pdf"]
-other_files = [".mobi", ".exe"]
-zip_files = [".zip"]
+other_files = [".mobi", ".exe", ".msi", ".epub"]
+zip_files = [".zip", ".rar"]
 music_files = [".mp3"]
 video_files = [".mp4"]
 
@@ -28,12 +28,11 @@ def fileTransporter(file_type, file_folder, destination_folder):
 
     for files in file_folder_list:
         try:
-            if os.path.isfile(files) and files.endswith(file_type):
-                shutil.move(files, destination_folder)
+            if files.endswith(file_type):
+                shutil.move(os.path.join(source, files), destination_folder)
         except:
             print("ERROR: Something went wrong")
 
 for extension, folder in zip(file_extensions, folders):
     for file_type in range(len(extension)):
-        print(extension[file_type])
         fileTransporter(extension[file_type], source, folder)
